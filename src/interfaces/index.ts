@@ -82,7 +82,7 @@ export interface RowProps {
 export interface UserContextType {
   id: number,
   email: string,
-  userName: string,
+  username: string,
   role: string
 }
 
