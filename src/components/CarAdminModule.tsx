@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { Typography } from '@mui/material';
 import CustomStepper from './stepper';
+import { useParams } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -21,7 +22,7 @@ export default function CarAdminModel() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const { id } = useParams();
   return (
     <>
       <Button
@@ -50,7 +51,7 @@ export default function CarAdminModel() {
             }}
             />
           </Typography>
-          <CustomStepper />
+          <CustomStepper id={id} />
         </Box>
       </Modal>
     </>
