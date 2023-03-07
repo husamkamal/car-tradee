@@ -1,0 +1,20 @@
+.buttons-container {
+    margin: 2rem auto;
+  }
+  
+.buttons-container button {
+    white-space: nowrap;
+    margin: 1rem;
+    width: 9rem;
+    height: 3rem;
+  }
+  .strip_Model{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400;
+    background-color: white;
+    box-shadow: 24;
+    padding: 2rem;
+  }

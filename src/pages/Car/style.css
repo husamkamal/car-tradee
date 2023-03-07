@@ -1,0 +1,17 @@
+.buttons-container {
+    margin: 2rem auto;
+  }
+  
+  .buttons-container button {
+    white-space: nowrap;
+    margin: 1rem;
+    width: 9rem;
+    height: 3rem;
+  }
+  .progress{
+    position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 48px;
+        height: 50rem;
+  }
