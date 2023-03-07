@@ -1,6 +1,7 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { Cookies } from 'react-cookie';
 import { useContext, useState } from 'react';
 import { loginSchema } from '../../helpers/validationSchema';
 import httpInstance from '../../services/axiosConfig';
@@ -8,6 +9,7 @@ import './style.css';
 import { UserContext } from '../../contexts';
 import { UserContextTypeWithDispatch } from '../../interfaces';
 
+const cookies = new Cookies();
 function Login() {
   const [responseError, setResponseError] = useState<string>('');
   const { setUserInfo }:UserContextTypeWithDispatch = useContext(UserContext);
@@ -26,7 +28,7 @@ function Login() {
           const result = await httpInstance.post('/auth/login', values, {
             headers: {
               'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Credentials': true,
+              'Access-Control-Allow-Credentials': false,
               'Access-Control-Allow-Methods':
                 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
               'Access-Control-Allow-Headers':
@@ -36,6 +38,7 @@ function Login() {
           });
           console.log(result);
           setUserInfo(result.data);
+          cookies.set('token', result.data.token);
           navigate(state.currentLocation || '/');
         } catch (error:any) {
           setResponseError(error.response.data.message);
