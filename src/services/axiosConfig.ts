@@ -13,8 +13,8 @@ export const cancelTokenSource = axios.CancelToken.source();
 const httpInstance = axios.create({
   timeout: 5000,
   withCredentials: true,
-  // baseURL: '/api/v1/',
-  baseURL: 'https://car-trede-server.onrender.com/api/v1/',
+  baseURL: '/api/v1/',
+  // baseURL: 'https://car-trede-server.onrender.com/api/v1/',
 });
 
 Object.setPrototypeOf(httpInstance, axios);
