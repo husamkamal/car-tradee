@@ -57,7 +57,17 @@ function NavBar() {
     try {
       setSnackBarProperties((preState) => ({ ...preState, open: false }));
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const response = await httpInstance.get('auth/logout');
+      const response = await httpInstance.get('auth/logout', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': false,
+          'Access-Control-Allow-Methods':
+            'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+          'Access-Control-Allow-Headers':
+            // eslint-disable-next-line max-len
+            'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+        },
+      });
       setUserInfo(null);
     } catch (err) {
       setSnackBarProperties({ open: true, message: 'something went wrong! Try again.', type: 'error' });

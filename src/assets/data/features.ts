@@ -1,4 +1,3 @@
-/* eslint-disable quote-props */
 const features :any = {
   'Power seats': 'https://carswitch.com/assets/png/40.png',
   'Automated Parking': 'https://carswitch.com/assets/png/05.png',

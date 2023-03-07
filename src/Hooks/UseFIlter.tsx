@@ -4,23 +4,30 @@ import {
 import { useLocation } from 'react-router-dom';
 import { SnackBarContext } from '../contexts';
 import {
-  CarsFilterProps, CarsWithImagesData, Params, SnackBarContextTypeWithDispatch,
+  CarsFilterProps,
+  CarsWithImagesData,
+  Params,
+  SnackBarContextTypeWithDispatch,
 } from '../interfaces';
 import httpInstance from '../services';
 
 export default function useFIlter({
-  setCars, setPagination, setLoading, currentPage, search,
+  setCars,
+  setPagination,
+  setLoading,
+  currentPage,
+  search,
   setCurrentPAge,
-}:CarsFilterProps) {
+}: CarsFilterProps) {
   const { state } = useLocation();
 
   const [brand, setBrand] = useState<string>(state?.brand || '');
-  const [mileage, setMileage] = useState<number | number[] >(0);
+  const [mileage, setMileage] = useState<number | number[]>(0);
   const [year, setYear] = useState<string | null>(null);
   const [fuel, setFuel] = useState<string | null>('');
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [isGoodPrice, setPriceBool] = useState<boolean>(false);
-  const { setSnackBarProperties }:SnackBarContextTypeWithDispatch = useContext(SnackBarContext);
+  const { setSnackBarProperties }: SnackBarContextTypeWithDispatch = useContext(SnackBarContext);
 
   const changePriceType = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPriceBool(event.target.checked);
@@ -38,10 +45,7 @@ export default function useFIlter({
   ) => {
     setYear(value);
   };
-  const changeMileage = (
-    event: Event,
-    value: number | number[],
-  ) => {
+  const changeMileage = (event: Event, value: number | number[]) => {
     setMileage(value);
   };
   const changefuelType = (
@@ -56,7 +60,7 @@ export default function useFIlter({
   };
 
   useEffect(() => {
-    const params:Params = {
+    const params: Params = {
       page: currentPage,
       state: 'on-market',
     };
@@ -82,7 +86,9 @@ export default function useFIlter({
       try {
         setLoading(true);
         setSnackBarProperties((preState) => ({ ...preState, open: false }));
-        const response: CarsWithImagesData = await httpInstance.get('/cars?', { params });
+        const response: CarsWithImagesData = await httpInstance.get('/cars?', {
+          params,
+        });
         setCars(response.data.rows);
         setPagination(response.data.count);
         if (Math.ceil(response.data.count / 9) < currentPage) {
@@ -90,7 +96,11 @@ export default function useFIlter({
         }
         setLoading(false);
       } catch (error) {
-        setSnackBarProperties({ open: true, message: 'something went wrong!', type: 'error' });
+        setSnackBarProperties({
+          open: true,
+          message: 'something went wrong!',
+          type: 'error',
+        });
       }
     };
     getCars();

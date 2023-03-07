@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { Typography } from '@mui/material';
-import CustomStepper from './stepper';
 import { useParams } from 'react-router-dom';
+import CustomStepper from './stepper';
 
 const style = {
   position: 'absolute',
