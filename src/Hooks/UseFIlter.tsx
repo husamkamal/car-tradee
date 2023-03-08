@@ -96,7 +96,7 @@ export default function useFIlter({
             // eslint-disable-next-line max-len
             'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
           },
-          withCredentials: true,
+          withCredentials: false,
         });
         setCars(response.data.rows);
         setPagination(response.data.count);
