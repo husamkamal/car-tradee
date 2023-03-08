@@ -20,7 +20,17 @@ function Car() {
       try {
         setSnackBarProperties((preState) => ({ ...preState, open: false }));
         setIsLoading(true);
-        const response = await httpInstance.get(`/cars/${id}`);
+        const response = await httpInstance.get(`/cars/${id}`, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+            'Access-Control-Allow-Headers':
+            // eslint-disable-next-line max-len
+            'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          },
+          withCredentials: false,
+        });
         setCarInfo(response.data[0]);
         setIsLoading(false);
       } catch (error) {

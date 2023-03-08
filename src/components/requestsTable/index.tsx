@@ -48,6 +48,16 @@ function RequestsTable(props:Props) {
         const response: CarsWithCustomerData = await httpInstance.get('/cars/dashboard?', {
           params,
 
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+            'Access-Control-Allow-Headers':
+              // eslint-disable-next-line max-len
+              'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          },
+          withCredentials: false,
+
         });
         setCarsData(response.data.rows);
         setPageCount(Math.ceil(response.data.count / 10));

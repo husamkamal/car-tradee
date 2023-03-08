@@ -56,7 +56,17 @@ function SendRequestModule({ open, handleClose }: { open: boolean,
       try {
         setLoading(true);
         setSnackBarProperties((preState) => ({ ...preState, open: false }));
-        await httpInstance.post('/cars', values);
+        await httpInstance.post('/cars', values, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+            'Access-Control-Allow-Headers':
+            // eslint-disable-next-line max-len
+            'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          },
+          withCredentials: false,
+        });
         setLoading(false);
         setSnackBarProperties({
           open: true,

@@ -17,7 +17,17 @@ function AdminLogin() {
   const login = async (values:any) => {
     try {
       setResponseError('');
-      const result = await httpInstance.post('/auth/admin/login', values);
+      const result = await httpInstance.post('/auth/admin/login', values, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          // 'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+          'Access-Control-Allow-Headers':
+          // eslint-disable-next-line max-len
+          'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+        },
+        withCredentials: false,
+      });
       setUserInfo(result.data);
       navigate(state?.currentLocation || '/');
     } catch (error:any) {

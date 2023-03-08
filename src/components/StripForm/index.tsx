@@ -17,7 +17,18 @@ function StripeForm() {
 
   const buyCar = async () => {
     try {
-      await httpInstance.patch('/cars/buy', { id });
+      await httpInstance.patch('/cars/buy', {
+        id,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          // 'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+          'Access-Control-Allow-Headers':
+          // eslint-disable-next-line max-len
+          'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+        },
+        withCredentials: false,
+      });
       setSnackBarProperties({
         type: 'success',
         message: 'payment successfully check your email to more information',

@@ -53,7 +53,17 @@ function CustomStepper({ id }:{ id:string | undefined }) {
       try {
         setLoading(true);
         setSnackBarProperties((preState) => ({ ...preState, open: false }));
-        const response = await httpInstance.get(`/cars/${id}`);
+        const response = await httpInstance.get(`/cars/${id}`, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+            'Access-Control-Allow-Headers':
+            // eslint-disable-next-line max-len
+            'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          },
+          withCredentials: false,
+        });
         setCarData(response.data[0]);
         setLoading(false);
       } catch (error) {
@@ -86,7 +96,17 @@ function CustomStepper({ id }:{ id:string | undefined }) {
       try {
         setLoading(true);
         setSnackBarProperties((preState) => ({ ...preState, open: false }));
-        await httpInstance.put(`/cars/${id}`, values);
+        await httpInstance.put(`/cars/${id}`, values, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+            'Access-Control-Allow-Headers':
+            // eslint-disable-next-line max-len
+            'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          },
+          withCredentials: false,
+        });
         setLoading(false);
         handleNext();
         setSnackBarProperties(

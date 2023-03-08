@@ -23,7 +23,17 @@ export default function UserInfoProvider({ children }:any) {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const result = await httpInstance.get('/auth/user');
+        const result = await httpInstance.get('/auth/user', {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+            'Access-Control-Allow-Headers':
+            // eslint-disable-next-line max-len
+            'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          },
+          withCredentials: false,
+        });
         setUserInfo(result.data);
         setLoading(false);
       } catch (error) {
