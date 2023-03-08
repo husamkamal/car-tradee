@@ -60,7 +60,7 @@ function NavBar() {
       const response = await httpInstance.get('auth/logout', {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': false,
+          'Access-Control-Allow-Credentials': true,
           'Access-Control-Allow-Methods':
             'POST,PUT,PATCH,GET, DELETE,OPTIONS',
           'Access-Control-Allow-Headers':

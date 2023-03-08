@@ -29,7 +29,7 @@ function Row(props:RowProps) {
       const response = await httpInstance.delete(`/cars/${id}`, {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': false,
+          'Access-Control-Allow-Credentials': true,
           'Access-Control-Allow-Methods':
             'POST,PUT,PATCH,GET, DELETE,OPTIONS',
           'Access-Control-Allow-Headers':
@@ -51,7 +51,7 @@ function Row(props:RowProps) {
         state: 'under-check',
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': false,
+          'Access-Control-Allow-Credentials': true,
           'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
           'Access-Control-Allow-Headers':
           // eslint-disable-next-line max-len
