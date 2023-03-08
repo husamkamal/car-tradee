@@ -25,17 +25,7 @@ function Login() {
       const login = async () => {
         try {
           setResponseError('');
-          const result = await httpInstance.post('/auth/login', values, {
-            headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Credentials': true,
-              'Access-Control-Allow-Methods':
-                'POST,PUT,PATCH,GET, DELETE,OPTIONS',
-              'Access-Control-Allow-Headers':
-              // eslint-disable-next-line max-len
-                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-            },
-          });
+          const result = await httpInstance.post('/auth/login', values);
           console.log(result);
           setUserInfo(result.data);
           cookies.set('token', result.data.token);
