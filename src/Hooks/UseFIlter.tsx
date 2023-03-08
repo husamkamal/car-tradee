@@ -90,7 +90,7 @@ export default function useFIlter({
           params,
           headers: {
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': true,
+            // 'Access-Control-Allow-Credentials': true,
             'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
             'Access-Control-Allow-Headers':
             // eslint-disable-next-line max-len
