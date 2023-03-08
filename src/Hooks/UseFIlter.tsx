@@ -88,6 +88,14 @@ export default function useFIlter({
         setSnackBarProperties((preState) => ({ ...preState, open: false }));
         const response: CarsWithImagesData = await httpInstance.get('/cars?', {
           params,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+            'Access-Control-Allow-Headers':
+            // eslint-disable-next-line max-len
+            'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          },
         });
         setCars(response.data.rows);
         setPagination(response.data.count);
