@@ -266,6 +266,7 @@ function NavBar() {
                   </Button>
                 </NavLink>
               )}
+
             </Box>
           )
             : (

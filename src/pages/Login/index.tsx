@@ -95,6 +95,13 @@ function Login() {
             Submit
           </Button>
           <h4 className="signup">
+            <a href="/admin/login">
+              Log In as admin
+              {' '}
+
+            </a>
+          </h4>
+          <h4 className="signup">
             Don&apos;t you have an account?
             {' '}
             <a href="/signup">Create one!</a>
