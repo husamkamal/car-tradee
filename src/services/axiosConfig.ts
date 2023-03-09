@@ -15,7 +15,7 @@ const httpInstance = axios.create({
   timeout: 5000,
   // baseURL: '/api/v1/',
   headers: {
-    token: localStorage.getItem('token') || '',
+    Authorization: localStorage.getItem('token') || '',
     'Access-Control-Allow-Origin': '*',
     // 'Access-Control-Allow-Credentials': true,
     'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
