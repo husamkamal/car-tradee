@@ -1,5 +1,6 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
+import { Cookies } from 'react-cookie';
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts';
@@ -8,6 +9,7 @@ import { UserContextTypeWithDispatch } from '../../interfaces';
 import httpInstance from '../../services';
 import './style.css';
 
+const cookies = new Cookies();
 export default function SignUpform() {
   const { setUserInfo }:UserContextTypeWithDispatch = useContext(UserContext);
   const [resError, setResError] = useState<string>('');
@@ -34,19 +36,10 @@ export default function SignUpform() {
                 fullName, email, phoneNumber, password,
               },
 
-              {
-                headers: {
-                  'Access-Control-Allow-Origin': '*',
-                  // 'Access-Control-Allow-Credentials': true,
-                  'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
-                  'Access-Control-Allow-Headers':
-                  // eslint-disable-next-line max-len
-                  'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-                },
-                withCredentials: false,
-              },
             );
           setUserInfo(result.data);
+          cookies.set('token', result.data.token);
+          localStorage.setItem('token', result.data.token);
           navigate('/');
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {

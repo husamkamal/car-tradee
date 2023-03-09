@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         element: <Car />,
       },
       {
-        path: 'admin',
+        path: '/admin',
         element: <ProtectedRoute roles="admin"><DashBoardMain /></ProtectedRoute>,
         children: [
           { index: true, element: <DashBoard /> },

@@ -6,6 +6,7 @@ import {
 
 import MenuIcon from '@mui/icons-material/Menu';
 // import AdbIcon from '@mui/icons-material/Adb';
+import { useCookies } from 'react-cookie';
 import { useNavigate, NavLink, useLocation } from 'react-router-dom';
 import Images from '../../assets/index';
 import { SnackBarContext, UserContext } from '../../contexts';
@@ -14,6 +15,8 @@ import httpInstance from '../../services/axiosConfig';
 import SendRequestModule from '../sendRequsetModel';
 
 function NavBar() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const { userInfo, setUserInfo }: UserContextTypeWithDispatch = useContext(UserContext);
@@ -57,17 +60,9 @@ function NavBar() {
     try {
       setSnackBarProperties((preState) => ({ ...preState, open: false }));
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const response = await httpInstance.get('auth/logout', {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          // 'Access-Control-Allow-Credentials': true,
-          'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
-          'Access-Control-Allow-Headers':
-          // eslint-disable-next-line max-len
-          'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-        },
-        withCredentials: false,
-      });
+      const response = await httpInstance.get('auth/logout');
+      localStorage.removeItem('token');
+      removeCookie('token');
       setUserInfo(null);
     } catch (err) {
       setSnackBarProperties({ open: true, message: 'something went wrong! Try again.', type: 'error' });
