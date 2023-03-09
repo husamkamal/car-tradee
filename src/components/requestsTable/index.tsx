@@ -4,6 +4,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useCookies } from 'react-cookie';
 import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
@@ -27,6 +28,8 @@ type Props = {
 const skeletonRows = Array(10).map((ele, index) => (<TableSkeleton key={`skeletonRows${index}`} />));
 
 function RequestsTable(props:Props) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [cookies, setCookie] = useCookies(['token']);
   const { state } = props;
   const [carsData, setCarsData] = useState<CarsWithCustomerRow | [] >([]);
   const [page, setPage] = useState<number>(1);
@@ -45,9 +48,9 @@ function RequestsTable(props:Props) {
       try {
         setSnackBarProperties((preState) => ({ ...preState, open: false }));
         setLoading(true);
+
         const response: CarsWithCustomerData = await httpInstance.get('/cars/dashboard?', {
           params,
-
           headers: {
             'Access-Control-Allow-Origin': '*',
             // 'Access-Control-Allow-Credentials': true,

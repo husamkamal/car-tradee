@@ -36,7 +36,6 @@ function Login() {
             },
             withCredentials: false,
           });
-          console.log(result);
           setUserInfo(result.data);
           cookies.set('token', result.data.token);
           navigate(state.currentLocation || '/');

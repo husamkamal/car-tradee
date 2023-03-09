@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { HighlightOff } from '@mui/icons-material';
 import { useFormik } from 'formik';
+// import { useCookies } from 'react-cookie';
 import { Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SellCarModal from './Form';
@@ -31,6 +32,7 @@ const style = {
 
 function SendRequestModule({ open, handleClose }: { open: boolean,
   handleClose: () => void }) {
+  // const [cookies, setCookie] = useCookies(['token']);
   const { userInfo } = useContext(UserContext);
   const [loading, setLoading] = useState<boolean>(true);
   const { setSnackBarProperties }:SnackBarContextTypeWithDispatch = useContext(SnackBarContext);
@@ -56,17 +58,18 @@ function SendRequestModule({ open, handleClose }: { open: boolean,
       try {
         setLoading(true);
         setSnackBarProperties((preState) => ({ ...preState, open: false }));
-        await httpInstance.post('/cars', values, {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            // 'Access-Control-Allow-Credentials': true,
-            'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
-            'Access-Control-Allow-Headers':
-            // eslint-disable-next-line max-len
-            'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-          },
-          withCredentials: false,
-        });
+        await httpInstance.post('/cars', { ...values });
+        // , {
+        //   headers: {
+        //     'Access-Control-Allow-Origin': '*',
+        //     // 'Access-Control-Allow-Credentials': true,
+        //     'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
+        //     'Access-Control-Allow-Headers':
+        // eslint-disable-next-line max-len
+        //     'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+        //   },
+        //   withCredentials: false,
+        // }
         setLoading(false);
         setSnackBarProperties({
           open: true,

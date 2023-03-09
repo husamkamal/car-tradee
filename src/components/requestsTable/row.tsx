@@ -5,6 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
+// import { useCookies } from 'react-cookie';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Typography from '@mui/material/Typography';
@@ -20,23 +21,14 @@ function Row(props:RowProps) {
     car, state, setCarsData,
   } = props;
   const [open, setOpen] = useState(false);
+  // const [cookies, setCookie] = useCookies(['token']);
   const navigate = useNavigate();
   const { setSnackBarProperties }:SnackBarContextTypeWithDispatch = useContext(SnackBarContext);
 
   const deleteCar = async (id:number) => {
     try {
       setSnackBarProperties((preState) => ({ ...preState, open: false }));
-      const response = await httpInstance.delete(`/cars/${id}`, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          // 'Access-Control-Allow-Credentials': true,
-          'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
-          'Access-Control-Allow-Headers':
-          // eslint-disable-next-line max-len
-          'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-        },
-        withCredentials: false,
-      });
+      const response = await httpInstance.delete(`/cars/${id}`);
       setCarsData((prevState) => prevState.filter(((element) => element.id !== id)));
       setSnackBarProperties({ open: true, message: 'Sell request deleted successfully', type: 'success' });
     } catch (err) {
