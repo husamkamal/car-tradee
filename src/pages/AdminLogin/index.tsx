@@ -1,6 +1,7 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
+import { Cookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts';
 import { AdminLoginSchema } from '../../helpers/validationSchema';
@@ -8,6 +9,7 @@ import { UserContextTypeWithDispatch } from '../../interfaces';
 import httpInstance from '../../services';
 import './styles.css';
 
+const cookies = new Cookies();
 function AdminLogin() {
   const [responseError, setResponseError] = useState<string>('');
   const { setUserInfo }:UserContextTypeWithDispatch = useContext(UserContext);
@@ -17,18 +19,10 @@ function AdminLogin() {
   const login = async (values:any) => {
     try {
       setResponseError('');
-      const result = await httpInstance.post('/auth/admin/login', values, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          // 'Access-Control-Allow-Credentials': true,
-          'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
-          'Access-Control-Allow-Headers':
-          // eslint-disable-next-line max-len
-          'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-        },
-        withCredentials: false,
-      });
+      const result = await httpInstance.post('/auth/admin/login', values);
       setUserInfo(result.data);
+      cookies.set('token', result.data.token);
+      localStorage.setItem('token', result.data.token);
       navigate(state?.currentLocation || '/');
     } catch (error:any) {
       setResponseError(error.response.data.message);

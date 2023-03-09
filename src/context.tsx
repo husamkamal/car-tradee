@@ -1,6 +1,7 @@
 import {
   createContext, useEffect, useMemo, useState,
 } from 'react';
+import { Cookies } from 'react-cookie';
 import { UserContextType, UserContextTypeWithDispatch } from './interfaces';
 import httpInstance from './services/axiosConfig';
 
@@ -19,6 +20,7 @@ export const UserContext = createContext<UserContextTypeWithDispatch>({
   }),
 });
 
+const cookies = new Cookies();
 export default function UserInfoProvider({ children }: any) {
   const [userInfo, setUserInfo] = useState<UserContextType | null>(null);
 
@@ -27,6 +29,8 @@ export default function UserInfoProvider({ children }: any) {
       try {
         const result = await httpInstance.get('/auth/user');
         setUserInfo(result.data);
+        cookies.set('token', result.data.token);
+        localStorage.setItem('token', result.data.token);
       } catch (error) {
         setUserInfo(null);
       }
