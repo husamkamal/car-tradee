@@ -1,8 +1,6 @@
 import axios, { AxiosError } from 'axios';
-import { useCookies } from 'react-cookie';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const [cookies, setCookie] = useCookies(['token']);
 function handleError(error: AxiosError) {
   if (axios.isCancel(error)) {
     return 'Axios is canceled';
@@ -17,7 +15,7 @@ const httpInstance = axios.create({
   timeout: 5000,
   // baseURL: '/api/v1/',
   headers: {
-    token: cookies.token,
+    token: localStorage.getItem('token') || '',
     'Access-Control-Allow-Origin': '*',
     // 'Access-Control-Allow-Credentials': true,
     'Access-Control-Allow-Methods': 'POST,PUT,PATCH,GET, DELETE,OPTIONS',
