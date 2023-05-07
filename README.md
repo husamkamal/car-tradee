@@ -7,7 +7,7 @@
   <a href="https://github.com/CA-G12/car-trade">
     <img src="https://i.imgur.com/veF5F6J.png" alt="Logo" width="200" height="140">
   </a>
-
+<h1>Demo Link : </h1><a href="https://car-trade-client.vercel.app">versal</a>
 </div>
 
 
@@ -15,7 +15,7 @@
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
-  <h1>Demo Link : </h1><a href="https://car-trade-client.vercel.app">versal</a>
+  
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
