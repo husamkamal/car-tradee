@@ -82,13 +82,6 @@
 * [Stripe](https://stripe.com/)
 
 
-### Database Schema <span id="database-schema"></span>
-![image](https://i.imgur.com/ih6nChg.png)
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started <span id="getting-started"></span>
